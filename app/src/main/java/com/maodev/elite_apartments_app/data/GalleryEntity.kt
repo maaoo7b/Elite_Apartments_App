@@ -5,7 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class GalleryEntity(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    val id: Int? = null,
     val uri: String,
     val date: String
 

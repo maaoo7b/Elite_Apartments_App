@@ -7,12 +7,17 @@ class GalleryRepository(private val galleryDAO: GalleryDAO) {
     suspend fun getImages(): List<Gallery> {
         val entities = galleryDAO.getImages()
         return entities.map {
-            Gallery(uri = it.uri, date = it.date)
+            Gallery(id = it.id, uri = it.uri, date = it.date)
         }
     }
 
     suspend fun addImage(image: Gallery) {
         val entity = GalleryEntity(uri = image.uri, date = image.date)
         galleryDAO.addImage(entity)
+    }
+
+    suspend fun deleteImage(idImage: Int?) {
+        val entity = GalleryEntity(id = idImage, uri = "", date = "")
+        galleryDAO.deleteImage(entity)
     }
 }
