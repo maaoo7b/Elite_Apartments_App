@@ -2,6 +2,7 @@ package com.maodev.elite_apartments_app.main
 
 import android.content.Intent
 import android.net.Uri
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -89,6 +90,7 @@ fun MyFAB(viewModel: MainViewModel) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ItemGallery(image: Gallery, viewModel: MainViewModel) {
+    val context = LocalContext.current
     Card(
         border = BorderStroke(1.dp, Color.LightGray),
         modifier = Modifier
@@ -98,6 +100,9 @@ fun ItemGallery(image: Gallery, viewModel: MainViewModel) {
                 detectTapGestures(onDoubleTap = {
                     viewModel.deleteImage(image.id)
                     viewModel.getImages()
+                    Toast
+                        .makeText(context, "Image deleted", Toast.LENGTH_SHORT)
+                        .show()
                 })
             },
         elevation = CardDefaults.cardElevation(5.dp),
