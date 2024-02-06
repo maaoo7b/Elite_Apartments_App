@@ -3,6 +3,8 @@ package com.maodev.elite_apartments_app.main
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.maodev.elite_apartments_app.data.GalleryRepository
@@ -11,6 +13,10 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class MainViewModel(private val galleryRepository: GalleryRepository) : ViewModel() {
+
+    private
+    val _showDialog = MutableLiveData<Boolean>()
+    val showDialog: LiveData<Boolean> = _showDialog
 
     var state by mutableStateOf(GalleryState())
         private set
@@ -40,4 +46,13 @@ class MainViewModel(private val galleryRepository: GalleryRepository) : ViewMode
             galleryRepository.deleteImage(id)
         }
     }
+
+    fun onShowDialog(id: String):String {
+        _showDialog.value = true
+        return id
+    }
+    fun onDialogClose() {
+        _showDialog.value = false
+    }
+
 }

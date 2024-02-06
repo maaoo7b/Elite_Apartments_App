@@ -20,4 +20,5 @@ class GalleryRepository(private val galleryDAO: GalleryDAO) {
         val entity = GalleryEntity(id = idImage, uri = "", date = "")
         galleryDAO.deleteImage(entity)
     }
+
 }
